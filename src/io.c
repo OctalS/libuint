@@ -38,7 +38,7 @@ int	__set_uintN(CHUNK_TYPE *dst, const char *str, unsigned int N) {
 		*curent = *curent | (temp << (4 * b));
 	}
 
-	return 0;
+	return 1;
 }
 
 

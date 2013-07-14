@@ -34,19 +34,24 @@ typedef CHUNK_TYPE	uint1024_t[CHUNKS_1024];
 #define	uint256_add(D, A, B)	__uintN_add(D, A, B, CHUNKS_256)
 #define	uint1024_add(D, A, B)	__uintN_add(D, A, B, CHUNKS_1024)
 
+#define	uint128_mul(D, A, B)	__uintN_mul(D, A, B, CHUNKS_128)
+#define	uint256_mul(D, A, B)	__uintN_mul(D, A, B, CHUNKS_256)
+#define	uint1024_mul(D, A, B)	__uintN_mul(D, A, B, CHUNKS_1024)
+
+
 
 #define	set_uint128(D, S)	__set_uintN(D, S, CHUNKS_128)
 #define	set_uint256(D, S)	__set_uintN(D, S, CHUNKS_256)
 #define	set_uint1024(D, S)	__set_uintN(D, S, CHUNKS_1024)
-
-
 
 #define	get_uint128(S)		__get_uintN(S, CHUNKS_128)
 #define	get_uint256(S)		__get_uintN(S, CHUNKS_256)
 #define	get_uint1024(S)		__get_uintN(S, CHUNKS_1024)
 
 
-extern	int	__uintN_add(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N);
+extern	void	__uintN_add(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N);
+
+extern	void	__uintN_mul(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N);
 
 extern	int	__set_uintN(CHUNK_TYPE *dst, const char *str, unsigned int N);
 
