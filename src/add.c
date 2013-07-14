@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <string.h>
 #include "libuint.h"
 
@@ -15,7 +16,7 @@ void	__uintN_add(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) 
 	memset(B, 0, sizeof(B));
 
 	memcpy(A, a, sizeof(A));
-	memcpy(B, a, sizeof(B));
+	memcpy(B, b, sizeof(B));
 
 	memset(dst, 0, N * CHUNK_SIZE);
 
@@ -47,4 +48,36 @@ void	__uintN_add(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) 
 		}
 
 	}
+}
+
+
+void	__uintN_add_s(CHUNK_TYPE *dst, CHUNK_TYPE *a, const char *b, unsigned int N) {
+
+	CHUNK_TYPE B[N];
+
+	__set_uintN(B, b, N);
+
+	__uintN_add(dst, a, B, N);
+}
+
+
+void	__uintN_add_ss(CHUNK_TYPE *dst, const char *a, const char *b, unsigned int N) {
+
+	CHUNK_TYPE A[N], B[N];
+
+	__set_uintN(A, a, N);
+	__set_uintN(B, b, N);
+
+	__uintN_add(dst, A, B, N);
+}
+
+void	__uintN_add_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N) {
+
+	CHUNK_TYPE BB[N];
+	char B[CHUNK_SIZE * 2 + 1];
+	
+	sprintf(B, "%lx", b);
+	__set_uintN(BB, B, N);
+
+	__uintN_add(dst, a, BB, N);
 }

@@ -8,7 +8,7 @@ SRC = ./src
 INC = ./include
 BUILD = ./build
 
-FLAGS = -Wall -I $(INC)
+FLAGS = -g -I $(INC)
 
 libuint:	clean
 

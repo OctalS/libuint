@@ -30,13 +30,25 @@ typedef CHUNK_TYPE	uint1024_t[CHUNKS_1024];
 
 
 
-#define	uint128_add(D, A, B)	__uintN_add(D, A, B, CHUNKS_128)
-#define	uint256_add(D, A, B)	__uintN_add(D, A, B, CHUNKS_256)
-#define	uint1024_add(D, A, B)	__uintN_add(D, A, B, CHUNKS_1024)
+#define	uint128_add(D, A, B)		__uintN_add(D, A, B, CHUNKS_128)
+#define	uint256_add(D, A, B)		__uintN_add(D, A, B, CHUNKS_256)
+#define	uint1024_add(D, A, B)		__uintN_add(D, A, B, CHUNKS_1024)
 
-#define	uint128_mul(D, A, B)	__uintN_mul(D, A, B, CHUNKS_128)
-#define	uint256_mul(D, A, B)	__uintN_mul(D, A, B, CHUNKS_256)
-#define	uint1024_mul(D, A, B)	__uintN_mul(D, A, B, CHUNKS_1024)
+#define	uint128_add_s(D, A, B)		__uintN_add_s(D, A, B, CHUNKS_128)
+#define	uint256_add_s(D, A, B)		__uintN_add_s(D, A, B, CHUNKS_256)
+#define	uint1024_add_s(D, A, B)		__uintN_add_s(D, A, B, CHUNKS_1024)
+
+#define	uint128_add_ss(D, A, B)		__uintN_add_ss(D, A, B, CHUNKS_128)
+#define	uint256_add_ss(D, A, B)		__uintN_add_ss(D, A, B, CHUNKS_256)
+#define	uint1024_add_ss(D, A, B)	__uintN_add_ss(D, A, B, CHUNKS_1024)
+
+#define	uint128_add_u(D, A, B)		__uintN_add_u(D, A, B, CHUNKS_128)
+#define	uint256_add_u(D, A, B)		__uintN_add_u(D, A, B, CHUNKS_256)
+#define	uint1024_add_u(D, A, B)		__uintN_add_u(D, A, B, CHUNKS_1024)
+
+#define	uint128_mul(D, A, B)		__uintN_mul(D, A, B, CHUNKS_128)
+#define	uint256_mul(D, A, B)		__uintN_mul(D, A, B, CHUNKS_256)
+#define	uint1024_mul(D, A, B)		__uintN_mul(D, A, B, CHUNKS_1024)
 
 
 
@@ -50,6 +62,12 @@ typedef CHUNK_TYPE	uint1024_t[CHUNKS_1024];
 
 
 extern	void	__uintN_add(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N);
+
+extern	void	__uintN_add_s(CHUNK_TYPE *dst, CHUNK_TYPE *a, const char *b, unsigned int N);
+
+extern	void	__uintN_add_ss(CHUNK_TYPE *dst, const char *a, const char *b, unsigned int N);
+
+extern	void	__uintN_add_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N);
 
 extern	void	__uintN_mul(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N);
 
