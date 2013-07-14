@@ -14,7 +14,9 @@ libuint:	clean
 
 	mkdir $(BUILD)
 
-	$(CC) $(FLAGS) $(CFLAGS)-o $(OUT) $(SRC)/libuint.c
+	$(CC) -c $(FLAGS) $(CFLAGS)-o $(BUILD)/add.o $(SRC)/add.c
+	$(CC) -c $(FLAGS) $(CFLAGS)-o $(BUILD)/io.o $(SRC)/io.c
+	$(CC) $(FLAGS) $(CFLAGS)-o $(OUT) $(SRC)/libuint.c $(BUILD)/*.o
 
 example:
 	make libuint
