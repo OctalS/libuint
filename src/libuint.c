@@ -30,7 +30,7 @@ int	main() {
 	printf("\nt = %lx\n", x1 * x2); 
 
 
-
+	uint256_lsh(NULL, NULL, 32);
 		
 	return 0;
 }
