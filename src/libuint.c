@@ -11,38 +11,29 @@
 int	main() {
 
 
-	uint256_t a, b, c;
+	uint128_t a, b, c;
 
 	uint64_t x1, x2;
 
-	set_uint256(a, "5");
-	set_uint256(b, "5");
 
-	//printf("a = %s\n", get_uint256(a));
-	//printf("b = %s\n", get_uint256(b));
-	uint256_add_u(c, a, 5);
+	set_uint128(a, "ab");
 
-	printf("c = %s\n", get_uint256(c));
+	uint128_lsh(a, 113);
+	printf("A = %s\n", get_uint128(a));
 
-	x1 = 0x20;
-	x2 = 0x324f;
+	uint128_rsh(a, 64);
+	printf("A = %s\n", get_uint128(a));
 
-	printf("\nt = %lx\n", x1 * x2); 
-
-
-	set_uint256(a, UINT256_MAX);
-	uint256_rsh(a, 3);
-
-	printf("A = %s\n", get_uint256(a));
 /*
-	for (x1 = 1; x1 < 256; x1++) {
-		uint256_lsh(a, 2);
+	for (x1 = 0; x1 < 256; x1++) {
+		uint256_rsh(a, 19);
 		printf("A = %s\n", get_uint256(a));
 	}
 */
 
-	x1 = ULONG_MAX >> 3;
-	printf("%lx\n", x1);
+
+//	x1 = ULONG_MAX >> 63;
+//	printf("%lx\n", x1);
 
 		
 	return 0;

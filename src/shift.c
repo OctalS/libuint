@@ -32,15 +32,20 @@ static void	shift_chunks_right(CHUNK_TYPE *dst, CHUNK_TYPE bits, unsigned int N)
 	n = CHUNK_SIZE * 8 - bits;
 	
 	for (a = 0, b = 1; b < N; a++, b++) {
+
 		if (n)
 			dst[a] >>= bits;
 		else
 			dst[a] = 0;
 
 		dst[a] |= dst[b] << n;
+
 	}
 
-	dst[N-1] >>= bits;
+	if (n)
+		dst[N-1] >>= bits;
+	else
+		dst[N-1] = 0;
 }
 
 
@@ -48,7 +53,7 @@ void	__uintN_lsh(CHUNK_TYPE *dst, unsigned int shift, unsigned int N) {
 
 	CHUNK_TYPE s, bits;
 
-	if (shift == CHUNK_SIZE * N * 8)
+	if (shift >= CHUNK_SIZE * N * 8)
 		return;
 
 	if (shift <= CHUNK_SIZE * 8) {
@@ -73,7 +78,7 @@ void	__uintN_rsh(CHUNK_TYPE *dst, unsigned int shift, unsigned int N) {
 
 	CHUNK_TYPE s, bits;
 
-	if (shift == CHUNK_SIZE * N * 8)
+	if (shift >= CHUNK_SIZE * N * 8)
 		return;
 
 	if (shift <= CHUNK_SIZE * 8) {
