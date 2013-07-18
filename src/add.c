@@ -4,7 +4,7 @@
 
 void	__uintN_add(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) {
 
-	CHUNK_TYPE i, chunk;
+	unsigned int i, chunk;
 	CHUNK_TYPE x, x1, x2, c;
 	CHUNK_TYPE A[N], B[N];
 
@@ -12,16 +12,13 @@ void	__uintN_add(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) 
 	x = 0;
 
 	/* save a and b */
-	memset(A, 0, sizeof(A));
-	memset(B, 0, sizeof(B));
-
 	memcpy(A, a, sizeof(A));
 	memcpy(B, b, sizeof(B));
 
-	memset(dst, 0, N * CHUNK_SIZE);
+	memset(dst, 0, CHUNK_SIZE * N);
 
 	for (chunk = 0; chunk < N; chunk++) { 
-		for (i = 0; i < CHUNK_SIZE * 8; i++) {
+		for (i = 0; i < CHUNK_BITS; i++) {
 			x1 = (A[chunk] >> i) & 1;
 			x2 = (B[chunk] >> i) & 1;
 			switch (x1 + x2 + c) {
@@ -55,8 +52,7 @@ void	__uintN_add_s(CHUNK_TYPE *dst, CHUNK_TYPE *a, const char *b, unsigned int N
 
 	CHUNK_TYPE B[N];
 
-	__set_uintN(B, b, N);
-
+	__set_uintN_s(B, b, N);
 	__uintN_add(dst, a, B, N);
 }
 
@@ -65,19 +61,17 @@ void	__uintN_add_ss(CHUNK_TYPE *dst, const char *a, const char *b, unsigned int 
 
 	CHUNK_TYPE A[N], B[N];
 
-	__set_uintN(A, a, N);
-	__set_uintN(B, b, N);
+	__set_uintN_s(A, a, N);
+	__set_uintN_s(B, b, N);
 
 	__uintN_add(dst, A, B, N);
 }
 
 void	__uintN_add_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N) {
 
-	CHUNK_TYPE BB[N];
-	char B[CHUNK_SIZE * 2 + 1];
+	CHUNK_TYPE B[N];
 	
-	sprintf(B, "%lx", b);
-	__set_uintN(BB, B, N);
-
-	__uintN_add(dst, a, BB, N);
+	memset(B, 0, CHUNK_SIZE * N);
+	B[0] = b;
+	__uintN_add(dst, a, B, N);
 }

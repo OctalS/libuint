@@ -16,17 +16,24 @@ int	main() {
 	uint64_t x1, x2;
 
 
-	set_uint256(a, "ff");
-	set_uint256(b, UINT256_MAX);
-
-	uint256_lsh(a, 255);
+	set_uint256_u(b, 0xff);
+	set_uint256(a, b);
 	printf("A = %s\n", get_uint256(a));
+
+	set_uint256_s(a, UINT256_MAX);
+	set_uint256_s(b, UINT256_MAX);
+	uint256_add(a, a, b);
+	printf("A = %s\n", get_uint256(a));
+
+	uint256_lsh(a, 113);
+	printf("LA = %s\n", get_uint256(a));
 
 	uint256_rsh(a, 64);
-	printf("A = %s\n", get_uint256(a));
+	printf("RA = %s\n", get_uint256(a));
 
 	uint256_and(a, a, b);
-	printf("A = %s\n", get_uint256(a));
+	printf("AA = %s\n", get_uint256(a));
+
 
 /*
 	for (x1 = 0; x1 < 256; x1++) {
