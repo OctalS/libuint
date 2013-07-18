@@ -30,8 +30,9 @@ int	main() {
 	printf("\nt = %lx\n", x1 * x2); 
 
 
-	set_uint256(a, "f");
-	uint256_lsh(a, 199);
+	set_uint256(a, UINT256_MAX);
+	uint256_rsh(a, 3);
+
 	printf("A = %s\n", get_uint256(a));
 /*
 	for (x1 = 1; x1 < 256; x1++) {
@@ -40,9 +41,7 @@ int	main() {
 	}
 */
 
-	x1 = 1ULL << 63;
-	printf("%lx\n", x1);
-	x1 <<= 2;
+	x1 = ULONG_MAX >> 3;
 	printf("%lx\n", x1);
 
 		
