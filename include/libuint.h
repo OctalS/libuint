@@ -46,9 +46,9 @@ typedef CHUNK_TYPE	uint1024_t[CHUNKS_1024];
 #define	uint256_add_u(D, A, B)		__uintN_add_u(D, A, B, CHUNKS_256)
 #define	uint1024_add_u(D, A, B)		__uintN_add_u(D, A, B, CHUNKS_1024)
 
-#define	uint128_lsh(D, A, B)		__uintN_lsh(D, A, B, CHUNKS_128)
-#define	uint256_lsh(D, A, B)		__uintN_lsh(D, A, B, CHUNKS_256)
-#define	uint1024_lsh(D, A, B)		__uintN_lsh(D, A, B, CHUNKS_1024)
+#define	uint128_lsh(D, A)		__uintN_lsh(D, A, CHUNKS_128)
+#define	uint256_lsh(D, A)		__uintN_lsh(D, A, CHUNKS_256)
+#define	uint1024_lsh(D, A)		__uintN_lsh(D, A, CHUNKS_1024)
 
 #define	uint128_mul(D, A, B)		__uintN_mul(D, A, B, CHUNKS_128)
 #define	uint256_mul(D, A, B)		__uintN_mul(D, A, B, CHUNKS_256)
@@ -79,7 +79,7 @@ extern	int	__set_uintN(CHUNK_TYPE *dst, const char *str, unsigned int N);
 
 extern	char	*__get_uintN(const CHUNK_TYPE *src, unsigned int N);
 
-extern	void    __uintN_lsh(CHUNK_TYPE *dst, CHUNK_TYPE *src, unsigned int shift, unsigned int N);
+extern	void    __uintN_lsh(CHUNK_TYPE *dst, unsigned int shift, unsigned int N);
 
 #endif
 
