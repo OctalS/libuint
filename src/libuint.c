@@ -11,18 +11,18 @@
 int	main() {
 
 
-	uint128_t a, b, c;
+	uint256_t a, b, c;
 
 	uint64_t x1, x2;
 
 
-	set_uint128(a, "ab");
+	set_uint256(a, "ff");
 
-	uint128_lsh(a, 113);
-	printf("A = %s\n", get_uint128(a));
+	uint256_lsh(a, 255);
+	printf("A = %s\n", get_uint256(a));
 
-	uint128_rsh(a, 64);
-	printf("A = %s\n", get_uint128(a));
+	uint256_rsh(a, 64);
+	printf("A = %s\n", get_uint256(a));
 
 /*
 	for (x1 = 0; x1 < 256; x1++) {

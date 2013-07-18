@@ -7,9 +7,9 @@
 
 #define CHUNK_SIZE	sizeof(CHUNK_TYPE)
 
-#define CHUNK_BITS	CHUNK_SIZE * 8
+#define CHUNK_BITS	(CHUNK_SIZE * 8)
 
-#define TOTAL_BITS	CHUNK_BITS * N
+#define TOTAL_BITS	(CHUNK_BITS * N)
 
 /*                                        n * 32bit entries | n * 64bit entries
                                           -------------------------------------*/
