@@ -19,7 +19,7 @@ void	__uintN_and_s(CHUNK_TYPE *dst, CHUNK_TYPE *a, const char *b, unsigned int N
 	CHUNK_TYPE B[N];
 
 	__set_uintN_s(B, b, N);
-	__uintN_or(dst, a, B, N);
+	__uintN_and(dst, a, B, N);
 }
 
 void	__uintN_and_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N) {
@@ -28,6 +28,6 @@ void	__uintN_and_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N)
 
 	memset(B, 0, CHUNK_SIZE * N);
 	B[0] = b;
-	__uintN_or(dst, a, B, N);
+	__uintN_and(dst, a, B, N);
 
 }

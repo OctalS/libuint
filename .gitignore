@@ -2,3 +2,5 @@ libuint
 test.c
 *.o
 *.a
+c.c
+c
