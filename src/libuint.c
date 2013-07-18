@@ -17,11 +17,15 @@ int	main() {
 
 
 	set_uint256(a, "ff");
+	set_uint256(b, UINT256_MAX);
 
 	uint256_lsh(a, 255);
 	printf("A = %s\n", get_uint256(a));
 
 	uint256_rsh(a, 64);
+	printf("A = %s\n", get_uint256(a));
+
+	uint256_and(a, a, b);
 	printf("A = %s\n", get_uint256(a));
 
 /*

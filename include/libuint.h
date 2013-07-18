@@ -33,6 +33,17 @@ typedef CHUNK_TYPE	uint1024_t[CHUNKS_1024];
 
 
 
+#define	uint128_or(D, A, B)		__uintN_or(D, A, B, CHUNKS_128)
+#define	uint256_or(D, A, B)		__uintN_or(D, A, B, CHUNKS_256)
+#define	uint1024_or(D, A, B)		__uintN_or(D, A, B, CHUNKS_1024)
+
+#define	uint128_xor(D, A, B)		__uintN_xor(D, A, B, CHUNKS_128)
+#define	uint256_xor(D, A, B)		__uintN_xor(D, A, B, CHUNKS_256)
+#define	uint1024_xor(D, A, B)		__uintN_xor(D, A, B, CHUNKS_1024)
+
+#define	uint128_and(D, A, B)		__uintN_and(D, A, B, CHUNKS_128)
+#define	uint256_and(D, A, B)		__uintN_and(D, A, B, CHUNKS_256)
+#define	uint1024_and(D, A, B)		__uintN_and(D, A, B, CHUNKS_1024)
 
 #define	uint128_add(D, A, B)		__uintN_add(D, A, B, CHUNKS_128)
 #define	uint256_add(D, A, B)		__uintN_add(D, A, B, CHUNKS_256)
@@ -73,6 +84,17 @@ typedef CHUNK_TYPE	uint1024_t[CHUNKS_1024];
 #define	get_uint1024(S)		__get_uintN(S, CHUNKS_1024)
 
 
+extern	void	__uintN_or(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N);
+
+extern	void	__uintN_xor(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N);
+
+extern	void	__uintN_and(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N);
+
+extern	void    __uintN_lsh(CHUNK_TYPE *dst, unsigned int shift, unsigned int N);
+
+extern	void    __uintN_rsh(CHUNK_TYPE *dst, unsigned int shift, unsigned int N);
+
+
 extern	void	__uintN_add(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N);
 
 extern	void	__uintN_add_s(CHUNK_TYPE *dst, CHUNK_TYPE *a, const char *b, unsigned int N);
@@ -81,15 +103,14 @@ extern	void	__uintN_add_ss(CHUNK_TYPE *dst, const char *a, const char *b, unsign
 
 extern	void	__uintN_add_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N);
 
+
 extern	void	__uintN_mul(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N);
+
 
 extern	int	__set_uintN(CHUNK_TYPE *dst, const char *str, unsigned int N);
 
 extern	char	*__get_uintN(const CHUNK_TYPE *src, unsigned int N);
 
-extern	void    __uintN_lsh(CHUNK_TYPE *dst, unsigned int shift, unsigned int N);
-
-extern	void    __uintN_rsh(CHUNK_TYPE *dst, unsigned int shift, unsigned int N);
 
 #endif
 
