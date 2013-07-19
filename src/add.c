@@ -15,7 +15,7 @@ void	__uintN_add(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) 
 	memcpy(A, a, sizeof(A));
 	memcpy(B, b, sizeof(B));
 
-	memset(dst, 0, CHUNK_SIZE * N);
+	memset(dst, 0, CHUNK_BYTES);
 
 	for (chunk = 0; chunk < N; chunk++) { 
 		for (i = 0; i < CHUNK_BITS; i++) {
@@ -71,7 +71,7 @@ void	__uintN_add_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N)
 
 	CHUNK_TYPE B[N];
 	
-	memset(B, 0, CHUNK_SIZE * N);
+	memset(B, 0, CHUNK_BYTES);
 	B[0] = b;
 	__uintN_add(dst, a, B, N);
 }

@@ -5,7 +5,7 @@
 
 int	__set_uintN(CHUNK_TYPE *dst, CHUNK_TYPE *src, unsigned int N) {
 
-	memcpy(dst, src, CHUNK_SIZE * N);
+	memcpy(dst, src, CHUNK_BYTES);
 	return 0;
 }
 
@@ -28,11 +28,11 @@ int	__set_uintN_s(CHUNK_TYPE *dst, const char *str, unsigned int N) {
 
 
 
-	if (strlen(str) > CHUNK_SIZE * N * 2)
+	if (strlen(str) > CHUNK_BYTES * 2)
 		return 0;
 
 
-	memset(dst, 0, N * CHUNK_SIZE);
+	memset(dst, 0, CHUNK_BYTES);
 
 	b = 0;
 	chunk = 0;

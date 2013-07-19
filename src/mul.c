@@ -35,7 +35,7 @@ void	__uintN_mul_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N)
 
 	CHUNK_TYPE B[N];
 
-	memset(B, 0, CHUNK_SIZE * N);
+	memset(B, 0, CHUNK_BYTES);
 	B[0] = b;
 	__uintN_mul(dst, a, B, N);
 
