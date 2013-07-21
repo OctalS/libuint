@@ -1,16 +1,15 @@
+#ifndef _GNU_SOURCE
+  #define _GNU_SOURCE
+#endif
+
 #include <string.h>
 #include "libuint.h"
 
-void	__uintN_and(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) {
 
-	unsigned int i;
-	CHUNK_TYPE A[N], B[N];
+inline void	__uintN_and(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) {
 
-	memcpy(A, a, sizeof(A));
-	memcpy(B, b, sizeof(B));
-
-	for (i = 0; i < N; i++)
-		dst[i] = A[i] & B[i];
+	while (N--)
+		dst[N] = a[N] & b[N];
 
 }
 

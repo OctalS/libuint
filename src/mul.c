@@ -1,25 +1,33 @@
+#ifndef _GNU_SOURCE
+  #define _GNU_SOURCE
+#endif
+
 #include <stdio.h>
 #include <string.h>
 #include "libuint.h"
 
 void	__uintN_mul(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) {
 
-	unsigned int i;
-	CHUNK_TYPE A[N], B[N], C[N];
+	int i, local_bit, global_bit;
+	CHUNK_TYPE A[N], B[N], C[N], x;
+
 
 	memcpy(A, a, sizeof(A));
 	memcpy(B, b, sizeof(B));
 	memset(C, 0, sizeof(C));
 	memset(dst, 0, sizeof(C));
 
-	for (i = 0; i < TOTAL_BITS; i++) {
-		__uintN_and_u(C, B, 1, N);
-		if (C[0])
-			__uintN_add(dst, dst, A, N);
 
-		__uintN_lsh(A, 1, N);
-		__uintN_rsh(B, 1, N);
-
+	global_bit = 0;
+	for (i = 0; i < N; i++) {
+		x = B[i];
+		for (local_bit = 0; local_bit < CHUNK_BITS; local_bit++, global_bit++, x >>= 1) {
+			if (x & 1) {
+				memcpy(C, A, sizeof(C));
+				__uintN_shl(C, global_bit, N);
+				__uintN_add(dst, dst, C, N);
+			}
+		}
 	}
 }
 

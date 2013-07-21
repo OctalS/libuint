@@ -1,11 +1,15 @@
+#ifndef _GNU_SOURCE
+  #define _GNU_SOURCE
+#endif
+
 #include <stdio.h>
 #include <string.h>
 #include "libuint.h"
 
 void	__uintN_add(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) {
 
-	unsigned int i, chunk;
-	CHUNK_TYPE x, x1, x2, c;
+	unsigned int chunk;
+	CHUNK_TYPE x, c;
 	CHUNK_TYPE A[N], B[N];
 
 	c = 0;
@@ -17,33 +21,12 @@ void	__uintN_add(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) 
 
 	memset(dst, 0, CHUNK_BYTES);
 
-	for (chunk = 0; chunk < N; chunk++) { 
-		for (i = 0; i < CHUNK_BITS; i++) {
-			x1 = (A[chunk] >> i) & 1;
-			x2 = (B[chunk] >> i) & 1;
-			switch (x1 + x2 + c) {
-				case 0:
-					x = 0;
-					c = 0;
-					break;
-				case 1:
-					x = 1;
-					c = 0;
-					break;
-				case 2:
-					x = 0;
-					c = 1;
-					break;
-				case 3:
-					x = 1;
-					c = 1;
-					break;
-			}
-	
-			dst[chunk] |= x << i;
-	
-		}
+	for (chunk = 0; chunk < N; chunk++) {
+		x = A[chunk] + B[chunk];
 
+		dst[chunk] = x + c;
+
+		c = x < A[chunk] ? 1 : 0;
 	}
 }
 

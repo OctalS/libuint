@@ -18,11 +18,14 @@
 
 /*				  n * 32bit entries | n * 64bit entries
 				  -------------------------------------*/
+#define CHUNKS_32	(CPU_SIZE ?	1           :        1)
+#define CHUNKS_64	(CPU_SIZE ?	2           :        1)
 #define CHUNKS_128	(CPU_SIZE ?	4           :        2)
 #define CHUNKS_256	(CPU_SIZE ?	8           :        4)
 #define CHUNKS_512	(CPU_SIZE ?	16          :        8)
 #define CHUNKS_1024	(CPU_SIZE ?	32          :        16)
 
+typedef CHUNK_TYPE	Uint64_t[CHUNKS_64];
 typedef CHUNK_TYPE	uint128_t[CHUNKS_128];
 typedef CHUNK_TYPE	uint256_t[CHUNKS_256];
 typedef CHUNK_TYPE	uint1024_t[CHUNKS_1024];
@@ -64,7 +67,6 @@ extern	void			__uintN_or_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigne
 
 
 
-
 #define	uint128_xor(D, A, B)	__uintN_xor(D, A, B, CHUNKS_128)
 #define	uint256_xor(D, A, B)	__uintN_xor(D, A, B, CHUNKS_256)
 #define	uint1024_xor(D, A, B)	__uintN_xor(D, A, B, CHUNKS_1024)
@@ -96,6 +98,7 @@ extern	void			__uintN_xor_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsign
 extern	void			__uintN_and(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N);
 
 
+
 #define	uint128_and_s(D, A, B)	__uintN_and_s(D, A, B, CHUNKS_128)
 #define	uint256_and_s(D, A, B)	__uintN_and_s(D, A, B, CHUNKS_256)
 #define	uint1024_and_s(D, A, B)	__uintN_and_s(D, A, B, CHUNKS_1024)
@@ -111,18 +114,21 @@ extern	void			__uintN_and_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsign
 
 
 
-#define	uint128_lsh(D, A)	__uintN_lsh(D, A, CHUNKS_128)
-#define	uint256_lsh(D, A)	__uintN_lsh(D, A, CHUNKS_256)
-#define	uint1024_lsh(D, A)	__uintN_lsh(D, A, CHUNKS_1024)
-
-extern	void    		__uintN_lsh(CHUNK_TYPE *dst, unsigned int shift, unsigned int N);
+#define	uint128_shl(D, A)	__uintN_shl(D, A, CHUNKS_128)
+#define	uint256_shl(D, A)	__uintN_shl(D, A, CHUNKS_256)
+#define	uint1024_shl(D, A)	__uintN_shl(D, A, CHUNKS_1024)
 
 
-#define	uint128_rsh(D, A)	__uintN_rsh(D, A, CHUNKS_128)
-#define	uint256_rsh(D, A)	__uintN_rsh(D, A, CHUNKS_256)
-#define	uint1024_rsh(D, A)	__uintN_rsh(D, A, CHUNKS_1024)
+extern	void    		__uintN_shl(CHUNK_TYPE *dst, unsigned int shift, unsigned int N);
 
-extern	void			    __uintN_rsh(CHUNK_TYPE *dst, unsigned int shift, unsigned int N);
+
+#define	uint128_shr(D, A)	__uintN_shr(D, A, CHUNKS_128)
+#define	uint256_shr(D, A)	__uintN_shr(D, A, CHUNKS_256)
+#define	uint1024_shr(D, A)	__uintN_shr(D, A, CHUNKS_1024)
+
+
+extern	void			 __uintN_shr(CHUNK_TYPE *dst, unsigned int shift, unsigned int N);
+
 
 
 #define	uint128_add(D, A, B)	__uintN_add(D, A, B, CHUNKS_128)

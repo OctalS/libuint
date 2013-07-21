@@ -1,3 +1,7 @@
+#ifndef _GNU_SOURCE
+  #define _GNU_SOURCE
+#endif
+
 #include <stdio.h>
 #include <string.h>
 
@@ -82,7 +86,7 @@ char	*__get_uintN(const CHUNK_TYPE *src, unsigned int N) {
 				echo = 1;
 			}
 
-			sprintf(&str[j++], "%x", val);
+			sprintf(&str[j++], "%lx", val);
 		}
 	}
 

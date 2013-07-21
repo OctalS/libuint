@@ -1,9 +1,16 @@
+#ifndef _GNU_SOURCE
+  #define _GNU_SOURCE
+#endif
+
 #include "libuint.h"
 
-static void	shift_chunks_left(CHUNK_TYPE *dst, CHUNK_TYPE bits, unsigned int N) {
+
+static inline void	shift_chunks_left(CHUNK_TYPE *dst, CHUNK_TYPE bits, unsigned int N) __attribute__((always_inline));
+static inline void	shift_chunks_right(CHUNK_TYPE *dst, CHUNK_TYPE bits, unsigned int N) __attribute__((always_inline));
+
+static inline void	shift_chunks_left(CHUNK_TYPE *dst, CHUNK_TYPE bits, unsigned int N) {
 
 	unsigned int a, b, n;
-	CHUNK_TYPE A, B, C;
 
 	n = CHUNK_BITS - bits;
 	
@@ -17,10 +24,9 @@ static void	shift_chunks_left(CHUNK_TYPE *dst, CHUNK_TYPE bits, unsigned int N) 
 }
 
 
-static void	shift_chunks_right(CHUNK_TYPE *dst, CHUNK_TYPE bits, unsigned int N) {
+static inline void	shift_chunks_right(CHUNK_TYPE *dst, CHUNK_TYPE bits, unsigned int N) {
 
 	unsigned int a, b, n;
-	CHUNK_TYPE A, B, C;
 
 	n = CHUNK_BITS - bits;
 	
@@ -33,13 +39,14 @@ static void	shift_chunks_right(CHUNK_TYPE *dst, CHUNK_TYPE bits, unsigned int N)
 	dst[N-1] = n ? dst[N-1] >> bits : 0;
 }
 
-
-void	__uintN_lsh(CHUNK_TYPE *dst, unsigned int shift, unsigned int N) {
+inline	void	__uintN_shl(CHUNK_TYPE *dst, unsigned int shift, unsigned int N) {
 
 	CHUNK_TYPE s, bits;
 
-	if (shift >= TOTAL_BITS)
+
+	if (shift >= TOTAL_BITS || !shift)
 		return;
+
 
 	if (shift <= CHUNK_BITS) {
 		shift_chunks_left(dst, shift, N);
@@ -59,12 +66,14 @@ void	__uintN_lsh(CHUNK_TYPE *dst, unsigned int shift, unsigned int N) {
 
 }
 
-void	__uintN_rsh(CHUNK_TYPE *dst, unsigned int shift, unsigned int N) {
+inline	void	__uintN_shr(CHUNK_TYPE *dst, unsigned int shift, unsigned int N) {
 
 	CHUNK_TYPE s, bits;
 
-	if (shift >= TOTAL_BITS)
+
+	if (shift >= TOTAL_BITS || !shift)
 		return;
+
 
 	if (shift <= CHUNK_BITS) {
 		shift_chunks_right(dst, shift, N);

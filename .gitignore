@@ -4,3 +4,5 @@ test.c
 *.a
 c.c
 c
+big_nums
+*.so
