@@ -7,23 +7,23 @@
 
 #include "libuint.h"
 
-int	__set_uintN(CHUNK_TYPE *dst, CHUNK_TYPE *src, unsigned int N) {
+int	uint_set(CHUNK_TYPE *dst, CHUNK_TYPE *src, unsigned int N) {
 
 	memcpy(dst, src, CHUNK_BYTES);
 	return 0;
 }
 
-int	__set_uintN_u(CHUNK_TYPE *dst, CHUNK_TYPE src, unsigned int N) {
+int	uint_set_u(CHUNK_TYPE *dst, CHUNK_TYPE src, unsigned int N) {
 
 	char str[UINT_MAX_STR];
 
 	memset(str, 0, UINT_MAX_STR);
-	sprintf(str, "%lx", src);
+	sprintf(str, CPU_SIZE ? "%x" : "%lx", src);
 
-	return __set_uintN_s(dst, str, N);
+	return uint_set_s(dst, str, N);
 }
 
-int	__set_uintN_s(CHUNK_TYPE *dst, const char *str, unsigned int N) {
+int	uint_set_s(CHUNK_TYPE *dst, const char *str, unsigned int N) {
 
 	int i, b;
 
@@ -63,7 +63,7 @@ int	__set_uintN_s(CHUNK_TYPE *dst, const char *str, unsigned int N) {
 
 
 
-char	*__get_uintN(const CHUNK_TYPE *src, unsigned int N) {
+char	*uint_get(const CHUNK_TYPE *src, unsigned int N) {
 
 	long chunk, i, j;
 	CHUNK_TYPE val;
@@ -86,7 +86,7 @@ char	*__get_uintN(const CHUNK_TYPE *src, unsigned int N) {
 				echo = 1;
 			}
 
-			sprintf(&str[j++], "%lx", val);
+			sprintf(&str[j++], CPU_SIZE ? "%x" : "%lx", val);
 		}
 	}
 

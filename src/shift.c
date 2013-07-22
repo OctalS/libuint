@@ -39,7 +39,7 @@ static inline void	shift_chunks_right(CHUNK_TYPE *dst, CHUNK_TYPE bits, unsigned
 	dst[N-1] = n ? dst[N-1] >> bits : 0;
 }
 
-inline	void	__uintN_shl(CHUNK_TYPE *dst, unsigned int shift, unsigned int N) {
+inline	void	uint_shl(CHUNK_TYPE *dst, unsigned int shift, unsigned int N) {
 
 	CHUNK_TYPE s, bits;
 
@@ -66,7 +66,7 @@ inline	void	__uintN_shl(CHUNK_TYPE *dst, unsigned int shift, unsigned int N) {
 
 }
 
-inline	void	__uintN_shr(CHUNK_TYPE *dst, unsigned int shift, unsigned int N) {
+inline	void	uint_shr(CHUNK_TYPE *dst, unsigned int shift, unsigned int N) {
 
 	CHUNK_TYPE s, bits;
 

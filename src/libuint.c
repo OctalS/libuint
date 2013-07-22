@@ -22,38 +22,38 @@
 void	fnv_test128(const char *data, size_t size) {
 
 	size_t i;
-	uint128_t prime, dst;
+	Uint128_t prime, dst;
 
-	set_uint128_s(dst, OFFSET128);
-	set_uint128_s(prime, PRIME128);
+	uint_set_s(dst, OFFSET128, U128);
+	uint_set_s(prime, PRIME128, U128);
 
 	//printf("offset: %s\n", get_uint1024(dst));
 	//printf("prime: %s\n", get_uint1024(prime));
 
 	for (i = 0; i < size; i++) {
-		uint128_xor_u(dst, dst, data[i]);	
-		uint128_mul(dst, dst, prime);
+		uint_xor_u(dst, dst, data[i], U128);	
+		uint_mul(dst, dst, prime, U128);
 	}
-	printf("\n   AA = %s\n", get_uint128(dst));
+	printf("\n   AA = %s\n", uint_get(dst, U128));
 }
 
 void	fnv_test1024(const char *data, size_t size) {
 
 	size_t i;
-	uint1024_t prime, dst;
+	Uint1024_t prime, dst;
 
-	set_uint1024_s(dst, OFFSET1024);
-	set_uint1024_s(prime, PRIME1024);
+	uint_set_s(dst, OFFSET1024, U1024);
+	uint_set_s(prime, PRIME1024, U1024);
 
 	//printf("offset: %s\n", get_uint1024(dst));
 	//printf("prime: %s\n", get_uint1024(prime));
 
 	for (i = 0; i < size; i++) {
-		uint1024_xor_u(dst, dst, data[i]);	
-		uint1024_mul(dst, dst, prime);
+		uint_xor_u(dst, dst, data[i], U1024);	
+		uint_mul(dst, dst, prime, U1024);
 	}
 
-	printf("\n   AA = %s\n", get_uint1024(dst));
+	printf("\n   AA = %s\n", uint_get(dst, U1024));
 }
 
 int	main() {
@@ -64,13 +64,14 @@ int	main() {
 	size_t size;
 	int i;
 
-	uint128_t a, b, c;
-	uint1024_t x1, x2, x3;
+	Uint128_t a, b, c;
+	Uint1024_t x1, x2, x3;
 	Uint64_t q, w, e;
 
 
 
 	size = 1000000;
+
 
 	bla = malloc(size);
 	memset(bla, 3, size);
@@ -82,41 +83,5 @@ int	main() {
 	return 0;
 
 
-
-
-	set_uint128_s(a, UINT128_MAX);
-	set_uint128_s(b, UINT128_MAX);
-	uint128_add(a, a, b);
-	printf("\n   AA = %s\n", get_uint128(a));
-
-
-
-
-
-
-
-/*
-	set_uint1024_s(x1, "124545433");
-	set_uint1024_s(x2, "43454543543435354353222323");
-
-
-	uint1024_mul(x1, x1, x2);
-	printf("\n   AA = %s\n", get_uint1024(x1));
-*/
-
-
-
-
-/*
-	__set_uintN_s(q, "123", CHUNKS_64);
-	__set_uintN_s(w, "123", CHUNKS_64);
-
-	__uintN_mul(q, q, w, CHUNKS_64);
-
-
-
-	printf("\n   AA = %s\n", __get_uintN(q, CHUNKS_64));
-*/
-	return 0;
 }
 
