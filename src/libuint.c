@@ -77,8 +77,14 @@ int	main() {
 	memset(bla, 3, size);
 
 
-	fnv_test1024(bla, size);
+	//fnv_test128(bla, size);
+	
+	
+	uint_set_s(a, "3", U128);
+	uint_set_s(b, UINT128_MAX, U128);
+	uint_sub(c, a, b, U128);
 
+	printf("%s\n", uint_get(c, U128));
 
 	return 0;
 

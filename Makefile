@@ -20,6 +20,7 @@ libuint:	clean
 	$(CC) -c $(FLAGS) $(CFLAGS) -o $(BUILD)/and.o $(SRC)/and.c
 	$(CC) -c $(FLAGS) $(CFLAGS) -o $(BUILD)/shift.o $(SRC)/shift.c
 	$(CC) -c $(FLAGS) $(CFLAGS) -o $(BUILD)/add.o $(SRC)/add.c
+	$(CC) -c $(FLAGS) $(CFLAGS) -o $(BUILD)/sub.o $(SRC)/sub.c
 	$(CC) -c $(FLAGS) $(CFLAGS) -o $(BUILD)/mul.o $(SRC)/mul.c
 	$(CC) -c $(FLAGS) $(CFLAGS) -o $(BUILD)/io.o $(SRC)/io.c
 

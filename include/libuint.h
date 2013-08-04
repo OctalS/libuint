@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#define CHUNK_TYPE	uint64_t
+#define CHUNK_TYPE	uint32_t
 
 #define CHUNK_SIZE	sizeof(CHUNK_TYPE)
 
@@ -110,6 +110,19 @@ extern	void		uint_add_ss(CHUNK_TYPE *dst, const char *a, const char *b, unsigned
 
 
 extern	void		uint_add_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N);
+
+
+
+extern	void		uint_sub(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N);
+
+
+extern	void		uint_sub_s(CHUNK_TYPE *dst, CHUNK_TYPE *a, const char *b, unsigned int N);
+
+
+extern	void		uint_sub_ss(CHUNK_TYPE *dst, const char *a, const char *b, unsigned int N);
+
+
+extern	void		uint_sub_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N);
 
 
 
