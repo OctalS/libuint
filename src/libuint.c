@@ -61,14 +61,38 @@ int	main() {
 
 	const char str[] = "Moi mecho mnogo go obi4am";
 	char *bla;
+	char A[100] = "";
+	char B[100] = "";
 	size_t size;
 	int i;
 
-	Uint128_t a, b, c;
+	Uint128_t a, b, c, res, rem;
 	Uint1024_t x1, x2, x3;
 	Uint64_t q, w, e;
 
 
+
+	printf("A = ");
+	scanf("%s", A);
+
+	printf("B = ");
+	scanf("%s", B);
+
+	
+	uint_set_s(a, A, U128);
+	uint_set_s(b, B, U128);
+
+	printf("a: %s\n", uint_get(a, U128));
+	printf("b: %s\n", uint_get(b, U128));
+
+	uint_div(res, rem, a, b, U128);
+
+
+	printf("res: %s\n", uint_get(res, U128));
+	printf("rem: %s\n", uint_get(rem, U128));
+
+
+	return 0;
 
 	size = 1000000;
 
@@ -77,7 +101,7 @@ int	main() {
 	memset(bla, 3, size);
 
 
-	//fnv_test128(bla, size);
+	fnv_test128(bla, size);
 	
 	
 	uint_set_s(a, "3", U128);

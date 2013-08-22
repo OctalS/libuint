@@ -98,3 +98,17 @@ char	*uint_get(const CHUNK_TYPE *src, unsigned int N) {
 	return str;
 }
 
+
+int	uint_cmp(CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) {
+
+	char condA[N];
+	char condB[N];
+	int i;
+
+	for (i = 0; i < N; i++) {
+		condA[i] = (char)(a[i] >= b[i]);
+		condB[i] = (char)(a[i] <= b[i]);
+	}
+
+	return memcmp(condA, condB, N);
+}
