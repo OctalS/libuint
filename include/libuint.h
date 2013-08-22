@@ -141,6 +141,11 @@ extern	void		uint_mul_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned i
 extern	void		uint_div(CHUNK_TYPE *q, CHUNK_TYPE *r, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N);
 
 
+extern	void		uint_div_s(CHUNK_TYPE *q, CHUNK_TYPE *r, CHUNK_TYPE *a, const char *b, unsigned int N);
+
+
+extern	void		uint_div_u(CHUNK_TYPE *q, CHUNK_TYPE *r, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N);
+
 
 
 extern	int		uint_set(CHUNK_TYPE *dst, CHUNK_TYPE *src, unsigned int N);
