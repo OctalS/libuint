@@ -99,6 +99,7 @@ char	*uint_get(const CHUNK_TYPE *src, unsigned int N) {
 }
 
 
+
 int	uint_cmp(CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) {
 
 	char condA[N];
@@ -111,4 +112,23 @@ int	uint_cmp(CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) {
 	}
 
 	return memcmp(condA, condB, N);
+}
+
+
+int	uint_cmp_s(CHUNK_TYPE *a, const char *b, unsigned int N) {
+
+	CHUNK_TYPE B[N];
+
+	uint_set_s(B, b, N);
+	return uint_cmp(a, B, N);
+}
+
+
+int	uint_cmp_u(CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N) {
+
+	CHUNK_TYPE B[N];
+
+	memset(B, 0, CHUNK_BYTES);
+	B[0] = b;
+	return uint_cmp(a, B, N);
 }
