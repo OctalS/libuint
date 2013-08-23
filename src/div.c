@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <signal.h>
 #include "libuint.h"
 
 void	uint_div(CHUNK_TYPE *q, CHUNK_TYPE *r, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) {
@@ -18,8 +19,8 @@ void	uint_div(CHUNK_TYPE *q, CHUNK_TYPE *r, CHUNK_TYPE *a, CHUNK_TYPE *b, unsign
 	memset(r, 0, CHUNK_BYTES);
 
 	if (!uint_cmp(B, q, N)) {
-		fprintf(stderr, "libuint: division by zero!\n");
-		exit(EXIT_FAILURE);
+		raise(SIGFPE);
+		return;
 	}
 
 	for (i = TOTAL_BITS - 1; i >= 0; i--) {

@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#define CHUNK_TYPE	uint64_t
+#define CHUNK_TYPE	uint32_t
 
 #define CHUNK_SIZE	sizeof(CHUNK_TYPE)
 

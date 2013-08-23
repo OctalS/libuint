@@ -80,9 +80,9 @@ int	main() {
 
 	
 	uint_set_s(a, A, U128);
-	//uint_set_s(b, B, U128);
+	uint_set_s(b, B, U128);
 
-	uint_div_u(res, rem, a, 0x555566677, U128);
+	uint_div(res, rem, a, b, U128);
 
 
 	printf("res: %s\n", uint_get(res, U128));
