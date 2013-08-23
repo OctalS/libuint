@@ -178,6 +178,7 @@ extern	int		uint_get_bit(CHUNK_TYPE *src, int bit);
 extern	void		uint_set_bit(CHUNK_TYPE *dst, int bit);
 
 
+extern	int		uint_is_zero(CHUNK_TYPE *a, unsigned int N);
 
 #endif
 

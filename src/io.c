@@ -149,3 +149,14 @@ int	uint_cmp_u(CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N) {
 	B[0] = b;
 	return uint_cmp(a, B, N);
 }
+
+
+int	uint_is_zero(CHUNK_TYPE *a, unsigned int N) {
+
+	int rc = 0;
+
+	while (N--)
+		rc = rc || a[N];
+
+	return !rc;
+}

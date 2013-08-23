@@ -8,20 +8,21 @@
 #include <signal.h>
 #include "libuint.h"
 
+
 void	uint_div(CHUNK_TYPE *q, CHUNK_TYPE *r, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) {
 
 	CHUNK_TYPE A[N], B[N];
 	int i;
 
+	if (uint_is_zero(b, N)) {
+		raise(SIGFPE);
+		return;
+	}
+
 	memcpy(A, a, sizeof(A));
 	memcpy(B, b, sizeof(B));
 	memset(q, 0, CHUNK_BYTES);
 	memset(r, 0, CHUNK_BYTES);
-
-	if (!uint_cmp(B, q, N)) {
-		raise(SIGFPE);
-		return;
-	}
 
 	for (i = TOTAL_BITS - 1; i >= 0; i--) {
 		uint_shl(r, 1, N);
