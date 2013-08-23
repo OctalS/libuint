@@ -59,7 +59,6 @@ void	fnv_test1024(const char *data, size_t size) {
 int	main() {
 
 
-	const char str[] = "Moi mecho mnogo go obi4am";
 	char *bla;
 	char A[100] = "";
 	char B[100] = "";
