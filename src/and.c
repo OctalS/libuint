@@ -6,7 +6,7 @@
 #include "libuint.h"
 
 
-inline void	uint_and(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) {
+void	uint_and(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) {
 
 	while (N--)
 		dst[N] = a[N] & b[N];
