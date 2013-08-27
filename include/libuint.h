@@ -33,6 +33,9 @@
 #define U256		(CPU_SIZE ?	8           :        4)
 #define U512		(CPU_SIZE ?	16          :        8)
 #define U1024		(CPU_SIZE ?	32          :        16)
+#define U2048		(CPU_SIZE ?	64          :        32)
+
+#define UMAX		U2048
 
 #define	uint_create(type_name, size)	typedef	CHUNK_TYPE	type_name[size]
 #define uint_var_size(var)		(sizeof(var) / CHUNK_SIZE)
@@ -44,6 +47,7 @@ uint_create(Uint128_t, U128);
 uint_create(Uint256_t, U256);
 uint_create(Uint512_t, U512);
 uint_create(Uint1024_t, U1024);
+uint_create(Uint2048_t, U2048);
 
 
 
@@ -61,8 +65,16 @@ uint_create(Uint1024_t, U1024);
 			ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\
 			ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\
 			ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+#define UINT2048_MAX	"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\
+			ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\
+			ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\
+			ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\
+			ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\
+			ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\
+			ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\
+			ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
 
-#define	UINT_MAX_BITLEN		CHUNK_SIZE * U1024 * 2
+#define	UINT_MAX_BITLEN		CHUNK_SIZE * UMAX * 2
 #define	UINT_MAX_STR		UINT_MAX_BITLEN + 1
 
 
@@ -110,7 +122,6 @@ extern	void		uint_and_s(CHUNK_TYPE *dst, CHUNK_TYPE *a, const char *b, unsigned 
 
 #define	u_and_u(dst, a, b)	uint_and_u(dst, a, b, uint_var_size(dst))
 extern	void		uint_and_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N);
-
 
 
 

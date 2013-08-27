@@ -42,20 +42,35 @@ void	fnv_test1024(const char *data, size_t size) {
 	size_t i;
 	Uint1024_t prime, dst;
 
-	uint_set_s(dst, OFFSET1024, U1024);
-	uint_set_s(prime, PRIME1024, U1024);
+	u_set_s(dst, OFFSET1024);
+	u_set_s(prime, PRIME1024);
 
 	//printf("offset: %s\n", get_uint1024(dst));
 	//printf("prime: %s\n", get_uint1024(prime));
 
 	for (i = 0; i < size; i++) {
-		uint_xor_u(dst, dst, data[i], U1024);	
-		uint_mul(dst, dst, prime, U1024);
+		u_xor_u(dst, dst, data[i]);	
+		u_mul(dst, dst, prime);
 	}
 
-	printf("\n   AA = %s\n", uint_get(dst, U1024));
+	printf("\n   AA = %s\n", u_get(dst));
 }
 
+void	fnv_test2048(const char *data, size_t size) {
+
+	size_t i;
+	Uint2048_t prime, dst;
+
+	u_set_s(dst, OFFSET1024);
+	u_set_s(prime, PRIME1024);
+
+	for (i = 0; i < size; i++) {
+		u_xor_u(dst, dst, data[i]);	
+		u_mul(dst, dst, prime);
+	}
+
+	printf("\n   AA = %s\n", u_get(dst));
+}
 int	main() {
 
 
@@ -96,15 +111,9 @@ int	main() {
 	memset(bla, 3, size);
 
 
-	fnv_test128(bla, size);
+	fnv_test2048(bla, size);
 	
-	
-	uint_set_s(a, "3", U128);
-	uint_set_s(b, UINT128_MAX, U128);
-	uint_sub(c, a, b, U128);
-
-	printf("%s\n", uint_get(c, U128));
-
+	free(bla);
 	return 0;
 
 
