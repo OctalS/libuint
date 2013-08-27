@@ -84,6 +84,7 @@ int	main() {
 	Uint1024_t x1, x2, x3;
 
 
+	printf("Running with version: %s\n", u_version(0));
 
 /*
 	printf("A = ");

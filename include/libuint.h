@@ -1,7 +1,24 @@
 #ifndef LIBUINT_H
 #define LIBUINT
 
+#include <stdio.h>
 #include <stdint.h>
+
+//		Version
+
+#define LIBUINT_VERSION_MAJOR     1   
+#define LIBUINT_VERSION_MINOR     0   
+
+/* version control macros */
+#define LIBUINT_TO_STRING(s)      #s  
+#define LIBUINT_VERSION_NUM       LIBUINT_VERSION(LIBUINT_VERSION_MAJOR, LIBUINT_VERSION_MINOR)
+#define LIBUINT_VERSION_DOT(a, b) a.b 
+
+#define LIBUINT_VERSION(a, b)     (a << 8 | b)    
+#define LIBUINT_VERSION_STR       LIBUINT_VERSION_DOT(LIBUINT_VERSION_MAJOR, LIBUINT_VERSION_MINOR)
+#define LIBUINT_VERSION_STRING(a) LIBUINT_TO_STRING(a)
+
+
 
 //		Global Settings
 
@@ -79,6 +96,25 @@ uint_create(Uint2048_t, U2048);
 
 
 //		Function Prototypes
+
+/* Checks for libuint version.
+*
+*  req_version - requiered version to check. Use macro LIBUINT_VERSION(major,minor)
+*                passing 0 will make it return the current verion
+*
+* Return:
+*       version string or NULL if req_version > current versio */
+
+#define	u_version(req_ver)	uint_version(req_ver)
+const static inline char      *uint_version(int req_ver) {
+
+        if (!req_ver || req_ver <= LIBUINT_VERSION_NUM)
+                return LIBUINT_VERSION_STRING(LIBUINT_VERSION_STR);
+
+        return NULL;
+}
+
+
 
 #define u_or(dst, a, b)		uint_or(dst, a, b, uint_var_size(dst))
 extern	void		uint_or(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N);
