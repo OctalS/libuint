@@ -11,7 +11,6 @@
 #include "libuint.h"
 
 
-
 #define	OFFSET1024 	"5f7a76758ecc4d32e56d5a591028b74b29fc4223fdada16c3bf34eda3674da9a21d9000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004c6d7eb6e73802734510a555f256cc005ae556bde8cc9c6a93b21aff4b16c71ee90b3"
 
 #define PRIME1024	"10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000018d"
@@ -27,14 +26,11 @@ void	fnv_test128(const char *data, size_t size) {
 	u_set_s(dst, OFFSET128);
 	u_set_s(prime, PRIME128);
 
-	//printf("offset: %s\n", get_uint1024(dst));
-	//printf("prime: %s\n", get_uint1024(prime));
-
 	for (i = 0; i < size; i++) {
 		u_xor_u(dst, dst, data[i]);	
 		u_mul(dst, dst, prime);
 	}
-	printf("\n   AA = %s\n", u_get(dst));
+	printf("\nFNV 128 = %s\n", u_get(dst));
 }
 
 void	fnv_test1024(const char *data, size_t size) {
@@ -45,76 +41,32 @@ void	fnv_test1024(const char *data, size_t size) {
 	u_set_s(dst, OFFSET1024);
 	u_set_s(prime, PRIME1024);
 
-	//printf("offset: %s\n", get_uint1024(dst));
-	//printf("prime: %s\n", get_uint1024(prime));
-
 	for (i = 0; i < size; i++) {
 		u_xor_u(dst, dst, data[i]);	
 		u_mul(dst, dst, prime);
 	}
-
-	printf("\n   AA = %s\n", u_get(dst));
+	printf("\nFNV 1024 = %s\n", u_get(dst));
 }
 
-void	fnv_test2048(const char *data, size_t size) {
 
-	size_t i;
-	Uint2048_t prime, dst;
 
-	u_set_s(dst, OFFSET1024);
-	u_set_s(prime, PRIME1024);
-
-	for (i = 0; i < size; i++) {
-		u_xor_u(dst, dst, data[i]);	
-		u_mul(dst, dst, prime);
-	}
-
-	printf("\n   AA = %s\n", u_get(dst));
-}
 int	main() {
 
 
-	char *bla;
-	char A[100] = "";
-	char B[100] = "";
-	size_t size;
-	int i;
+	printf("Running with libuint version: %s\n", u_version(0));
 
-	Uint128_t a, b, c, res, rem;
-	Uint1024_t x1, x2, x3;
+	int size = 1000000;
+	char *buf = malloc(size);
 
+	memset(buf, 3, size);
 
-	printf("Running with version: %s\n", u_version(0));
+	printf("\nComputing 128 bit fnv hash from buffer with size %i\n", size);
+	fnv_test128(buf, size);
 
-/*
-	printf("A = ");
-	scanf("%s", A);
-
-	printf("B = ");
-	scanf("%s", B);
-
+	printf("\nComputing 1024 bit fnv hash from buffer with size %i\n", size);
+	fnv_test1024(buf, size);
 	
-	uint_set_s(a, A, U128);
-	uint_set_s(b, B, U128);
-
-	uint_div(res, rem, a, b, U128);
-
-
-	printf("res: %s\n", uint_get(res, U128));
-	printf("rem: %s\n", uint_get(rem, U128));
-*/
-
-
-	size = 1000000;
-
-
-	bla = malloc(size);
-	memset(bla, 3, size);
-
-
-	fnv_test2048(bla, size);
-	
-	free(bla);
+	free(buf);
 	return 0;
 
 
