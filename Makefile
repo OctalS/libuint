@@ -1,4 +1,4 @@
-PROG = big_nums
+PROG = example
 OUT = libuint
 
 CC = gcc
@@ -28,12 +28,12 @@ libuint:	clean
 
 	$(CC) -g -shared $(FLAGS) $(CFLAGS) -o $(OUT).so $(BUILD)/*.o
 
-	$(CC) -g -I$(INC) -L. -luint -Wl,-rpath,./ $(CFLAGS) -o $(PROG) $(SRC)/libuint.c
-
 static:
 	$(CC) -g $(FLAGS) $(CFLAGS) -o $(PROG) $(SRC)/libuint.c $(BUILD)/*.o
+
 example:
 	make libuint
+	$(CC) -g -I$(INC) -L. -luint -Wl,-rpath,./ $(CFLAGS) -o $(PROG) $(SRC)/$(PROG).c
 
 clean:
 	rm -rf $(PROG) $(OUT) $(BUILD)
