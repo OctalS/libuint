@@ -24,17 +24,17 @@ void	fnv_test128(const char *data, size_t size) {
 	size_t i;
 	Uint128_t prime, dst;
 
-	uint_set_s(dst, OFFSET128, U128);
-	uint_set_s(prime, PRIME128, U128);
+	u_set_s(dst, OFFSET128);
+	u_set_s(prime, PRIME128);
 
 	//printf("offset: %s\n", get_uint1024(dst));
 	//printf("prime: %s\n", get_uint1024(prime));
 
 	for (i = 0; i < size; i++) {
-		uint_xor_u(dst, dst, data[i], U128);	
-		uint_mul(dst, dst, prime, U128);
+		u_xor_u(dst, dst, data[i]);	
+		u_mul(dst, dst, prime);
 	}
-	printf("\n   AA = %s\n", uint_get(dst, U128));
+	printf("\n   AA = %s\n", u_get(dst));
 }
 
 void	fnv_test1024(const char *data, size_t size) {
@@ -67,10 +67,10 @@ int	main() {
 
 	Uint128_t a, b, c, res, rem;
 	Uint1024_t x1, x2, x3;
-	Uint64_t q, w, e;
 
 
 
+/*
 	printf("A = ");
 	scanf("%s", A);
 
@@ -86,9 +86,8 @@ int	main() {
 
 	printf("res: %s\n", uint_get(res, U128));
 	printf("rem: %s\n", uint_get(rem, U128));
+*/
 
-
-	return 0;
 
 	size = 1000000;
 
