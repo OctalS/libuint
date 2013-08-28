@@ -8,12 +8,29 @@ SRC = ./src
 INC = ./include
 BUILD = ./build
 
-FLAGS = -O3 -Wall -g -fPIC -I $(INC)
+FLAGS = -O3 -Wall -fPIC -I $(INC)
 
-libuint:	clean
+prefix = /usr
+
+shared:
+	make files
+	$(CC) -shared -I$(INC) $(CFLAGS) -Wl,-soname,$(OUT).so -o $(OUT).so $(BUILD)/*.o -lc
+
+static:
+	make files
+	ar cr $(OUT).a $(BUILD)/*.o
+
+
+example: $(OUT).so
+	make shared
+	$(CC) -g -I$(INC) -L. -luint -Wl,-rpath,./ $(CFLAGS) -o $(PROG) $(SRC)/$(PROG).c
+debug:
+	make static CFLAGS=-g
+	$(CC) -g -o $(PROG) $(SRC)/$(PROG).c $(OUT).a
+
+files:	clean
 
 	mkdir $(BUILD)
-
 
 	$(CC) -c $(FLAGS) $(CFLAGS) -o $(BUILD)/io.o $(SRC)/io.c
 	$(CC) -c $(FLAGS) $(CFLAGS) -o $(BUILD)/bit.o $(SRC)/bit.c
@@ -26,14 +43,9 @@ libuint:	clean
 	$(CC) -c $(FLAGS) $(CFLAGS) -o $(BUILD)/mul.o $(SRC)/mul.c
 	$(CC) -c $(FLAGS) $(CFLAGS) -o $(BUILD)/div.o $(SRC)/div.c
 
-	$(CC) -g -shared $(FLAGS) $(CFLAGS) -o $(OUT).so $(BUILD)/*.o
-
-static:
-	$(CC) -g $(FLAGS) $(CFLAGS) -o $(PROG) $(SRC)/libuint.c $(BUILD)/*.o
-
-example:
-	make libuint
-	$(CC) -g -I$(INC) -L. -luint -Wl,-rpath,./ $(CFLAGS) -o $(PROG) $(SRC)/$(PROG).c
+install $(OUT).so:
+	cp $(OUT).so $(prefix)/lib
+	cp $(INC)/$(OUT).h $(prefix)/include
 
 clean:
-	rm -rf $(PROG) $(OUT) $(BUILD)
+	rm -rf $(PROG) $(OUT)* $(BUILD)
