@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdint.h>
+#include <limits.h>
 
 //		Version
 
@@ -22,11 +23,31 @@
 
 //		Global Settings
 
-#define	CHUNK_TYPE	uintmax_t
+#if ULONG_MAX == 4294967295UL || defined (LIBUINT_BIT32)
 
-#ifdef LIBUINT_BIT32
-  #define CHUNK_TYPE	uint32_t
+  #define CHUNK_TYPE    uint32_t
+  #ifdef LIBUINT_BIT_WARNING
+    #warning      Compiling libuint for 32bit
+  #endif
+
+#elif ULONG_MAX == 18446744073709551615UL || defined (LIBUINT_BIT64)
+
+  #define CHUNK_TYPE    uint64_t
+  #ifdef LIBUINT_BIT_WARNING
+    #warning      Compiling libuint for 64bit
+  #endif
+
+#else
+
+  #ifdef LIBUINT_BIT_WARNING
+    #warning      Cannot determine CPU size. Please define LIBUINT_BIT32 or LIBUINT_BIT64
+    #warning      Compiling libuint for 32bit
+  #endif
+
+  #define CHUNK_TYPE    uint32_t
+
 #endif
+
 
 #define CHUNK_SIZE	sizeof(CHUNK_TYPE)
 #define CHUNK_BITS	(CHUNK_SIZE * 8)
