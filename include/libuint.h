@@ -21,7 +21,7 @@
 
 
 
-//		Global Settings
+//		CPU size check
 
 #if ULONG_MAX == 4294967295UL || defined (LIBUINT_BIT32)
 
@@ -49,38 +49,27 @@
 #endif
 
 
+//		Types and Sizes
+
 #define CHUNK_SIZE	sizeof(CHUNK_TYPE)
 #define CHUNK_BITS	(CHUNK_SIZE * 8)
 #define CHUNK_BYTES	(CHUNK_SIZE * N)
 #define TOTAL_BITS	(CHUNK_BITS * N)
 #define	CPU_SIZE	CHUNK_SIZE == sizeof(uint32_t)
 
-
-
-
-//		Types and Sizes
-
-/*				  n * 32bit entries | n * 64bit entries
-				  -------------------------------------*/
-#ifdef LIBUINT_BIT32
-  #define U64				2
-#endif
-/*				  n * 32bit entries | n * 64bit entries
-				  -------------------------------------*/
-#define U128		(CPU_SIZE ?	4           :        2)
-#define U256		(CPU_SIZE ?	8           :        4)
-#define U512		(CPU_SIZE ?	16          :        8)
-#define U1024		(CPU_SIZE ?	32          :        16)
-#define U2048		(CPU_SIZE ?	64          :        32)
-
-#define UMAX		U2048
-
+#define uint_val(bits)			((bits / 8) / CHUNK_SIZE)
 #define	uint_create(type_name, size)	typedef	CHUNK_TYPE	type_name[size]
 #define uint_var_size(var)		(sizeof(var) / CHUNK_SIZE)
 
-#ifdef LIBUINT_BIT32
-  uint_create(Uint64_t, U64);
-#endif
+#define U64		uint_val(64)
+#define U128		uint_val(128)
+#define U256		uint_val(256)
+#define U512		uint_val(512)
+#define U1024		uint_val(1024)
+#define U2048		uint_val(2048)
+#define UMAX		U2048
+
+uint_create(Uint64_t, U64);
 uint_create(Uint128_t, U128);
 uint_create(Uint256_t, U256);
 uint_create(Uint512_t, U512);
@@ -92,11 +81,12 @@ uint_create(Uint2048_t, U2048);
 
 //		Limits
 
-#define	UINT128_MAX	"ffffffffffffffffffffffffffffffff"
-#define	UINT256_MAX	UINT128_MAX UINT128_MAX
-#define	UINT512_MAX	UINT256_MAX UINT256_MAX
-#define UINT1024_MAX	UINT512_MAX UINT512_MAX
-#define UINT2048_MAX	UINT1024_MAX UINT1024_MAX
+#define U64_MAX		"ffffffffffffffff"
+#define	U128_MAX	U64_MAX U64_MAX
+#define	U256_MAX	U128_MAX U128_MAX
+#define	U512_MAX	U256_MAX U256_MAX
+#define U1024_MAX	U512_MAX U512_MAX
+#define U2048_MAX	U1024_MAX U1024_MAX
 
 #define	UINT_MAX_BITLEN		CHUNK_SIZE * UMAX * 2
 #define	UINT_MAX_STR		UINT_MAX_BITLEN + 1
