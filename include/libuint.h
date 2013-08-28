@@ -25,26 +25,26 @@
 
 #if ULONG_MAX == 4294967295UL || defined (LIBUINT_BIT32)
 
-  #define CHUNK_TYPE    uint32_t
-  #ifdef LIBUINT_BIT_WARNING
-    #warning      Compiling libuint for 32bit
-  #endif
+#  define CHUNK_TYPE    uint32_t
+#  ifdef LIBUINT_BIT_WARNING
+#    warning      Compiling libuint for 32bit
+#  endif
 
 #elif ULONG_MAX == 18446744073709551615UL || defined (LIBUINT_BIT64)
 
-  #define CHUNK_TYPE    uint64_t
-  #ifdef LIBUINT_BIT_WARNING
-    #warning      Compiling libuint for 64bit
-  #endif
+#  define CHUNK_TYPE    uint64_t
+#  ifdef LIBUINT_BIT_WARNING
+#    warning      Compiling libuint for 64bit
+#  endif
 
 #else
 
-  #ifdef LIBUINT_BIT_WARNING
-    #warning      Cannot determine CPU size. Please define LIBUINT_BIT32 or LIBUINT_BIT64
-    #warning      Compiling libuint for 32bit
-  #endif
+#  ifdef LIBUINT_BIT_WARNING
+#    warning      Cannot determine CPU size. Please define LIBUINT_BIT32 or LIBUINT_BIT64
+#    warning      Compiling libuint for 32bit
+#  endif
 
-  #define CHUNK_TYPE    uint32_t
+#  define CHUNK_TYPE    uint32_t
 
 #endif
 
@@ -275,5 +275,5 @@ extern	void			uint_set_bit(CHUNK_TYPE *dst, int bit);
 #define	u_is_zero(a)		uint_is_zero(a, uint_var_size(a))
 extern	int			uint_is_zero(CHUNK_TYPE *a, unsigned int N);
 
-#endif
+#endif /* LIBUINT_H */
 

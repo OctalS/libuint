@@ -1,47 +1,16 @@
-Libuint
-=======
+Libuint v1.0
+================================
+Author: vlad - octal.s@gmail.com
+================================
 
-A comapct lib to deal with large unsigned integer numbers.
+A comapct C library to deal with large unsigned integer numbers logic and arithmetic.
+It work with fixed size integers like Uint128_t, Uint256_t, ...etc
+It is 32/64 bit compatible.
 
-For API documentation and usage see doc/
+So far tested on:
+  x64    Linux/Fedora
+  i386   OpenBSD
+  mips32 Linux/Busybox
 
-
-1. Compile (General)
---------------------
-
-# compile
-
-	make
-  or
-	make prefix="install_path"
-
-# install
-
-	make install
-
-Link your program with -luint
-
-
-
-1.1 Compile (More Options)
---------------------------
-
-# Compile 32bit library on 64bit host
-
-	CFLAGS=-DLIBUINT_BIT32
-
-# Compile static library
-
-	make static
-	
-# Compile example program
-
-	make
-	make example
-
-1.2 Cross-Compile
------------------
-
-	make CC=your_cc CFLAGS=your_cflags
-
+See dir doc/ for more info on how to use it
 
