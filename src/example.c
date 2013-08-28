@@ -53,14 +53,8 @@ void	fnv_test1024(const char *data, size_t size) {
 int	main() {
 
 
-	Uint256_t test;
-
-	u_set_s(test, UINT256_MAX);
-	u_add_u(test, test, 1);
-	printf("%s\n", u_get(test));
-
-
 	printf("Running with libuint version: %s\n", u_version(0));
+	printf("CPU size is: %i\n", CHUNK_SIZE);
 
 	int size = 1000000;
 	char *buf = malloc(size);

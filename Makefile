@@ -2,6 +2,7 @@ PROG = example
 OUT = libuint
 
 CC = gcc
+AR = ar
 CFLAGS =
 
 SRC = ./src
@@ -18,8 +19,7 @@ shared:
 
 static:
 	make files
-	ar cr $(OUT).a $(BUILD)/*.o
-
+	$(AR) cr $(OUT).a $(BUILD)/*.o
 
 example: $(OUT).so
 	make shared

@@ -22,10 +22,10 @@
 
 //		Global Settings
 
-#ifdef	LIBUINT_BIT32
+#define	CHUNK_TYPE	uintmax_t
+
+#ifdef LIBUINT_BIT32
   #define CHUNK_TYPE	uint32_t
-#else
-  #define CHUNK_TYPE	uint64_t
 #endif
 
 #define CHUNK_SIZE	sizeof(CHUNK_TYPE)
@@ -71,9 +71,6 @@ uint_create(Uint2048_t, U2048);
 
 //		Limits
 
-#ifdef LIBUINT_BIT32
-  #define UINT64_MAX	"ffffffffffffffff"	
-#endif
 #define	UINT128_MAX	"ffffffffffffffffffffffffffffffff"
 #define	UINT256_MAX	UINT128_MAX UINT128_MAX
 #define	UINT512_MAX	UINT256_MAX UINT256_MAX

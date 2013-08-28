@@ -1,4 +1,47 @@
-libuint
+Libuint
 =======
 
-A comapct lib to deal with large integer numbers.
+A comapct lib to deal with large unsigned integer numbers.
+
+For API documentation and usage see doc/
+
+
+1. Compile (General)
+--------------------
+
+# compile
+
+	make
+  or
+	make prefix="install_path"
+
+# install
+
+	make install
+
+Link your program with -luint
+
+
+
+1.1 Compile (More Options)
+--------------------------
+
+# Compile 32bit library on 64bit host
+
+	CFLAGS=-DLIBUINT_BIT32
+
+# Compile static library
+
+	make static
+	
+# Compile example program
+
+	make
+	make example
+
+1.2 Cross-Compile
+-----------------
+
+	make CC=your_cc CFLAGS=your_cflags
+
+
