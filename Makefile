@@ -22,8 +22,8 @@ static:
 	$(AR) cr $(OUT).a $(BUILD)/*.o
 
 example: $(OUT).so
-	make shared
 	$(CC) -g -I$(INC) -L. -luint -Wl,-rpath,./ $(CFLAGS) -o $(PROG) $(SRC)/$(PROG).c
+
 debug:
 	make static CFLAGS=-g
 	$(CC) -g -o $(PROG) $(SRC)/$(PROG).c $(OUT).a

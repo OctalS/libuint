@@ -7,10 +7,12 @@
 
 #include "libuint.h"
 
+#define	is_hex(c)	((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F'))
+
 int	uint_set(CHUNK_TYPE *dst, CHUNK_TYPE *src, unsigned int N) {
 
 	memcpy(dst, src, CHUNK_BYTES);
-	return 0;
+	return 1;
 }
 
 int	uint_set_u(CHUNK_TYPE *dst, CHUNK_TYPE src, unsigned int N) {
@@ -49,6 +51,9 @@ int	uint_set_s(CHUNK_TYPE *dst, const char *str, unsigned int N) {
 			chunk++;
 			curent = &dst[chunk];
 		}
+
+		if (!is_hex(str[i]))
+			return 0;
 
 		if (str[i] < 0x61)
 			temp = str[i] - 0x30;
