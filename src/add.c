@@ -19,13 +19,8 @@ void	uint_add(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) {
 	memcpy(A, a, sizeof(A));
 	memcpy(B, b, sizeof(B));
 
-	memset(dst, 0, CHUNK_BYTES);
-
 	for (chunk = 0; chunk < N; chunk++) {
-		x = A[chunk] + B[chunk];
-
-		dst[chunk] = x + c;
-
+		dst[chunk] = x = A[chunk] + B[chunk] + c;
 		c = x < A[chunk] ? 1 : 0;
 	}
 }
