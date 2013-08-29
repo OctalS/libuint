@@ -102,10 +102,10 @@ uint_create(Uint2048_t, U2048);
 /* Checks for libuint version.
 *
 *  req_version - requiered version to check. Use macro LIBUINT_VERSION(major,minor)
-*                passing 0 will make it return the current verion
+*                passing 0 will make it return the current version
 *
 * Return:
-*       version string or NULL if req_version > current versio */
+*       version string or NULL if req_version > current version */
 
 #define	u_version(req_ver)	uint_version(req_ver)
 const static inline char	*uint_version(int req_ver) {

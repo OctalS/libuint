@@ -144,7 +144,7 @@ Checks for libuint version.
 
 char	*u_version(req_ver)
 
-Returns version string or NULL if req_version > current versio */
+Returns version string or NULL if req_version > current version
 
 
 3. Limits
