@@ -1,3 +1,173 @@
 Libuint v1.0 API Reference
 ==========================
 
+1. Names and Types
+------------------
+Available types are:
+
+Uint64_t - use this on a 32bit system
+Uint128_t
+Uint256_t
+Uint512_t
+Uint1024_t
+Uint2048_t
+
+The numbers are represented into a simple array of uint32_t or uint64_t.
+The first element of the array is the least significant word and the last the most significant.
+
+All function names start with 'u_'
+Some functions can get values from a normal integer variables or strings.
+Those end with:
+
+'_u' for unsigned integer (parametar will be named unsigned)
+  the unsigned parametar will be of type uint32_t or uint64_t
+
+'_s' for string (parametar will be named string)
+  strings represent the number in hex
+  The string length must not be bigger than exepcted one.
+
+2. Functions
+------------
+
+All 'uint_' parameters must be of the same type.
+If not, the result will be undefined.
+Source and destination variables may be the same. Most functions will make a
+private copy of them.
+
+
+2.1 Assignment
+--------------
+
+dst = src;
+
+int 	u_set(dst, src)
+int 	u_set_u(dst, unsigned src)
+int 	u_set_s(dst, string src)
+
+Return: 0 on error 
+
+
+2.1.1 Printing
+--------------
+
+char *u_get(var)
+
+Return: hex string of var 
+
+
+2.2 Arithmetic
+--------------
+
+Addition
+  dst = a + b;
+
+void 	u_add(dst, a, b)
+void 	u_add_u(dst, a, unsigned b)
+void 	u_add_s(dst, a, string b)
+void 	u_add_ss(dst, string a, string b)
+
+Subtraction
+  dst = a - b;
+
+void 	u_sub(dst, a, b)
+void 	u_sub_u(dst, a, unsigned b)
+void	u_sub_s(dst, a, string b)
+void	u_sub_ss(dst, string a, string b)
+
+Multiplication
+  dst = a * b;
+
+void	u_mul(dst, a, b)
+void	u_mul_u(dst, a, unsigned b)
+void	u_mul_s(dst, a, string b)
+
+Division
+  quotient = a / b;
+  reminder = a % b;
+
+void	u_div(quotient, reminder, a, b)
+void	u_div_u(quotient, reminder, a, unsigned b)
+void	u_div_s(quotient, reminder, a, string a)
+
+2.3. Bitwise 
+------------
+
+Bitwise OR
+  dst = a | b;
+
+void	u_or(dst, a, b)
+void	u_or_u(dst, a, unsigned b)
+void	u_or_s(dst, a, string b)
+
+Bitwise AND
+  dst = a & b;
+
+void	u_and(dst, a, b)
+void	u_and_u(dst, a, unsigned b)
+void	u_and_s(dst, a, string b)
+
+Bitwise XOR
+  dst = a ^ b;
+
+void	u_xor(dst, a, b)
+void	u_xor_u(dst, a, unsigned b)
+void	u_xor_s(dst, a, string b)
+
+Bitwise SHIFT
+
+void	u_shl(dst, shift)		dst <<= shift;
+void	u_shr(dst, shift)		dst >>= shift;
+
+Bit operations
+
+int	u_getbit(a, n)			Returns the bit n from a
+int	u_setbit(a, n)			Sets the bit n of a
+
+2.4. Misc
+---------
+
+Comparasion
+  Compares a and b and returns -1,0,1 for a < b, a == b, a > b
+
+int	u_cmp(a, b)			
+int	u_cmp_u(a, unsigned b)
+int	u_cmp_s(a, string b)
+
+int	u_is_zero(a)			
+
+Returns 1 if a == 0
+
+
+Checks for libuint version.
+  req_version - requiered version to check. Use macro LIBUINT_VERSION(major,minor)
+                passing 0 will make it return the current verion
+
+char	*u_version(req_ver)
+
+Returns version string or NULL if req_version > current versio */
+
+
+3. Limits
+---------
+
+Maximum number values: U128_MAX, U256_MAX, U512_MAX, U1024_MAX, U2048_MAX
+To set use:
+	u_set_s(a, U256_MAX);
+
+
+4. Referencing
+--------------
+
+If var is not a pointer you will access it like this:
+
+	Uint1024_t var;
+
+	u_set_s(var, U1024_MAX);
+	u_add_u(var, var, 1);
+	
+If var is a pointer for example as a parametar in a function:
+
+	void	do_stuff(Uint1024_t *var) {
+
+		u_add_u(*var, *var, 1);
+	}

@@ -1,3 +1,8 @@
+/*
+ * 		Libuint v1.0
+ * 		------------
+ * 	author: vlad - octal.s@gmail.com
+*/
 #ifndef LIBUINT_H
 #define LIBUINT
 
