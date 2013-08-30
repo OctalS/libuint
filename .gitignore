@@ -1,8 +1,4 @@
-libuint
-test.c
+*.swp
 *.o
-*.a
-c.c
-c
-example
-*.so
+libuint.a
+libuint.so

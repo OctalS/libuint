@@ -22,7 +22,7 @@ int	uint_set_u(CHUNK_TYPE *dst, CHUNK_TYPE src, unsigned int N) {
 	char str[UINT_MAX_STR];
 
 	memset(str, 0, UINT_MAX_STR);
-	sprintf(str, CPU_SIZE ? "%x" : "%lx", src);
+	sprintf(str, CPU_SIZE ? "%x" : "%llx", src);
 
 	return uint_set_s(dst, str, N);
 }
@@ -93,7 +93,7 @@ char	*uint_get(const CHUNK_TYPE *src, unsigned int N) {
 				echo = 1;
 			}
 
-			sprintf(&str[j++], CPU_SIZE ? "%x" : "%lx", val);
+			sprintf(&str[j++], CPU_SIZE ? "%x" : "%llx", val);
 		}
 	}
 
