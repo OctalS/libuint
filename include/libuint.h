@@ -192,6 +192,8 @@ extern	void			uint_add_ss(CHUNK_TYPE *dst, const char *a, const char *b, unsigne
 extern	void			uint_add_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N);
 
 
+#define u_inc(a)		uint_add_u(a, a, 1, uint_var_size(a))
+
 
 #define	u_sub(dst, a, b)	uint_sub(dst, a, b, uint_var_size(dst))
 extern	void			uint_sub(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N);
@@ -208,6 +210,8 @@ extern	void			uint_sub_ss(CHUNK_TYPE *dst, const char *a, const char *b, unsigne
 #define	u_sub_u(dst, a, b)	uint_sub_u(dst, a, b, uint_var_size(dst))
 extern	void			uint_sub_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N);
 
+
+#define	u_dec(a)		uint_sub_u(a, a, 1, uint_var_size(a))
 
 
 #define	u_mul(dst, a, b)	uint_mul(dst, a, b, uint_var_size(dst))
@@ -251,6 +255,9 @@ extern	int			uint_set_s(CHUNK_TYPE *dst, const char *str, unsigned int N);
 #define u_set_u(dst, str)	uint_set_u(dst, str, uint_var_size(dst))
 extern	int			uint_set_u(CHUNK_TYPE *dst, CHUNK_TYPE src, unsigned int N);
 
+
+#define u_xchg(a, b)		uint_xchg(a, b, uint_var_size(a))
+extern	void			uint_xchg(CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N);
 
 
 #define u_get(src)		uint_get(src, uint_var_size(src))
