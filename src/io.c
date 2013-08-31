@@ -2,8 +2,6 @@
   #define _GNU_SOURCE
 #endif
 
-#define	LIBUINT_BIT_WARNING
-
 #include <stdio.h>
 #include <string.h>
 
@@ -22,7 +20,12 @@ int	uint_set_u(CHUNK_TYPE *dst, CHUNK_TYPE src, unsigned int N) {
 	char str[UINT_MAX_STR];
 
 	memset(str, 0, UINT_MAX_STR);
+
+#ifdef	__gnu_linux__
+	sprintf(str, CPU_SIZE ? "%x" : "%lx", src);
+#else
 	sprintf(str, CPU_SIZE ? "%x" : "%llx", src);
+#endif
 
 	return uint_set_s(dst, str, N);
 }
@@ -93,7 +96,11 @@ char	*uint_get(const CHUNK_TYPE *src, unsigned int N) {
 				echo = 1;
 			}
 
+#ifdef __gnu_linux__
+			sprintf(&str[j++], CPU_SIZE ? "%x" : "%lx", val);
+#else
 			sprintf(&str[j++], CPU_SIZE ? "%x" : "%llx", val);
+#endif
 		}
 	}
 

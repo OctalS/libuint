@@ -2,6 +2,8 @@
   #define _GNU_SOURCE
 #endif
 
+#define	LIBUINT_BIT_WARNING
+
 #include <stdio.h>
 #include <string.h>
 #include "libuint.h"
