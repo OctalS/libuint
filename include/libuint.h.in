@@ -4,7 +4,7 @@
  * 	author: vlad - octal.s@gmail.com
 */
 #ifndef LIBUINT_H
-#define LIBUINT
+#define LIBUINT_H
 
 #include <stdio.h>
 #include <stdint.h>
@@ -28,31 +28,17 @@
 
 //		CPU size check
 
-#if ULONG_MAX == 4294967295UL || defined (LIBUINT_BIT32)
+#undef SIZEOF_VOID_P
 
+#if SIZEOF_VOID_P == 4
 #  define CHUNK_TYPE    uint32_t
-#  ifdef LIBUINT_BIT_WARNING
-#    warning      Compiling libuint for 32bit
-#  endif
-
-#elif ULONG_MAX == 18446744073709551615UL || defined (LIBUINT_BIT64)
-
+#  define HEX_FMT	"%x"
+#elif SIZEOF_VOID_P == 8
 #  define CHUNK_TYPE    uint64_t
-#  ifdef LIBUINT_BIT_WARNING
-#    warning      Compiling libuint for 64bit
-#  endif
-
+#  define HEX_FMT	"%lx"
 #else
-
-#  ifdef LIBUINT_BIT_WARNING
-#    warning      Cannot determine CPU size. Please define LIBUINT_BIT32 or LIBUINT_BIT64
-#    warning      Compiling libuint for 32bit
-#  endif
-
-#  define CHUNK_TYPE    uint32_t
-
+#  error Invalid size!
 #endif
-
 
 //		Types and Sizes
 
@@ -60,7 +46,6 @@
 #define CHUNK_BITS	(CHUNK_SIZE * 8)
 #define CHUNK_BYTES	(CHUNK_SIZE * N)
 #define TOTAL_BITS	(CHUNK_BITS * N)
-#define	CPU_SIZE	CHUNK_SIZE == sizeof(uint32_t)
 
 #define uint_val(bits)			((bits / 8) / CHUNK_SIZE)
 #define	uint_create(type_name, size)	typedef	CHUNK_TYPE	type_name[size]

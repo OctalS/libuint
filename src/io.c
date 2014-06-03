@@ -22,9 +22,9 @@ int	uint_set_u(CHUNK_TYPE *dst, CHUNK_TYPE src, unsigned int N) {
 	memset(str, 0, UINT_MAX_STR);
 
 #ifdef	__gnu_linux__
-	sprintf(str, CPU_SIZE ? "%x" : "%lx", src);
+	sprintf(str, HEX_FMT, src);
 #else
-	sprintf(str, CPU_SIZE ? "%x" : "%llx", src);
+	sprintf(str, HEX_FMT, src);
 #endif
 
 	return uint_set_s(dst, str, N);
@@ -97,9 +97,9 @@ char	*uint_get(const CHUNK_TYPE *src, unsigned int N) {
 			}
 
 #ifdef __gnu_linux__
-			sprintf(&str[j++], CPU_SIZE ? "%x" : "%lx", val);
+			sprintf(&str[j++], HEX_FMT, val);
 #else
-			sprintf(&str[j++], CPU_SIZE ? "%x" : "%llx", val);
+			sprintf(&str[j++], HEX_FMT, val);
 #endif
 		}
 	}

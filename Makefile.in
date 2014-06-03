@@ -1,0 +1,56 @@
+CC = @CC@
+AR = @AR@
+CFLAGS = @CFLAGS@
+CPPFLAGS = @CPPFLAGS@
+
+FLAGS = $(CFLAGS) $(CPPFLAGS)
+OBJ_FLAGS = -O3 -Wall -fPIC -I. -I$(inc)
+
+prefix = @prefix@
+
+example = example
+out = libuint
+
+src = src
+inc = include
+objs = $(src)/add.o
+objs += $(src)/and.o 
+objs += $(src)/bit.o
+objs += $(src)/div.o
+objs += $(src)/io.o
+objs += $(src)/mul.o
+objs += $(src)/or.o
+objs += $(src)/shift.o
+objs += $(src)/sub.o
+objs += $(src)/xor.o
+
+
+all: $(objs)
+	$(AR) cr $(out).a $(objs)
+	$(CC) -shared -fPIC $(FLAGS) -o $(out).so $(objs) -lc
+
+%.o: %.c
+	$(CC) -c $(OBJ_FLAGS) $(FLAGS) -o $@ $<
+
+example: all 
+	$(CC) -I$(inc) $(FLAGS) -o $(example) $(src)/$(example).c $(out).a
+
+debug:
+	make example CFLAGS+=-g
+
+install $(out).so $(out).a:
+	install -D $(out).so $(prefix)/lib/$(out)/$(out).so
+	install -D $(out).a $(prefix)/lib/$(out)/$(out).a
+	install -D $(inc)/$(out).h $(prefix)/include/$(out)/$(out).h
+
+uninstall:
+	rm -f $(prefix)/lib/$(out)/$(out).so
+	rm -f $(prefix)/lib/$(out)/$(out).a
+	rm -f $(prefix)/include/$(out)/$(out).h
+
+clean:
+	rm -f $(example) $(out)* $(src)/*.o
+	rm -f $(inc)/$(out).h
+	rm -f Makefile
+	rm -f config.*
+	rm -rf *.cache
