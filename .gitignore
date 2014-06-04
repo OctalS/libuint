@@ -1,9 +1,8 @@
-libuint
-test.c
 *.o
 *.a
-c.c
-c
-example
 *.so
-*.swp
+*.h
+*.status
+*.log
+example
+Makefile
