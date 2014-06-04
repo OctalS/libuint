@@ -39,14 +39,14 @@ debug:
 	make example CFLAGS+=-g
 
 install $(out).so $(out).a:
-	install -D $(out).so $(prefix)/lib/$(out)/$(out).so
-	install -D $(out).a $(prefix)/lib/$(out)/$(out).a
-	install -D $(inc)/$(out).h $(prefix)/include/$(out)/$(out).h
+	install -D $(out).so $(prefix)/lib/$(out).so
+	install -D $(out).a $(prefix)/lib/$(out).a
+	install -D $(inc)/$(out).h $(prefix)/include/$(out).h
 
 uninstall:
-	rm -f $(prefix)/lib/$(out)/$(out).so
-	rm -f $(prefix)/lib/$(out)/$(out).a
-	rm -f $(prefix)/include/$(out)/$(out).h
+	rm -f $(prefix)/lib/$(out).so
+	rm -f $(prefix)/lib/$(out).a
+	rm -f $(prefix)/include/$(out).h
 
 clean:
 	rm -f $(example) $(out)* $(src)/*.o
