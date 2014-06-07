@@ -1,36 +1,24 @@
 1. Compile (General)
 --------------------
 
+  ./configure
   make
+
+as root:
   make install
 or
-  make install prefix="install_path"
-
-Include <libuint.h> in your program and link with -luint
+  make uninstall
 
 
-1.1 Compile (More Options)
---------------------------
-
-# Compile 32bit library on 64bit host
-
-  CFLAGS=-DLIBUINT_BIT32
-
-
-# Compile static library
-
-  make static
-	
-
-# Compile example program
+1.1 Compile Example
+-------------------
 
   make
   make example
 
+1.2 Link and include
+--------------------
 
-1.2 Cross-Compile
------------------
+#include <libuint.h> in your program and link with -luint
 
-  make CC=your_cc CFLAGS=your_cflags
-
-
+For API documentation see doc/API
