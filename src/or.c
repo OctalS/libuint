@@ -10,8 +10,8 @@ void	uint_or(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) {
 	unsigned int i;
 	CHUNK_TYPE A[N], B[N];
 
-	memcpy(A, a, sizeof(A));
-	memcpy(B, b, sizeof(B));
+	__save(A, a);
+	__save(B, b);
 
 	for (i = 0; i < N; i++)
 		dst[i] = A[i] | B[i];
@@ -30,7 +30,7 @@ void	uint_or_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N) {
 
 	CHUNK_TYPE B[N];
 
-	memset(B, 0, CHUNK_BYTES);
+	__res(B);
 	B[0] = b;
 	uint_or(dst, a, B, N);
 

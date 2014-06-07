@@ -12,10 +12,10 @@ void	uint_mul(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) {
 	CHUNK_TYPE A[N], B[N], C[N], x;
 
 
-	memcpy(A, a, sizeof(A));
-	memcpy(B, b, sizeof(B));
-	memset(C, 0, sizeof(C));
-	memset(dst, 0, sizeof(C));
+	__save(A, a);
+	__save(B, b);
+	__res(C);
+	__res(dst);
 
 
 	global_bit = 0;
@@ -43,7 +43,7 @@ void	uint_mul_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N) {
 
 	CHUNK_TYPE B[N];
 
-	memset(B, 0, CHUNK_BYTES);
+	__res(B);
 	B[0] = b;
 	uint_mul(dst, a, B, N);
 

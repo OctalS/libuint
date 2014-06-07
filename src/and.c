@@ -8,8 +8,13 @@
 
 void	uint_and(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) {
 
+	CHUNK_TYPE A[N], B[N];
+
+	__save(A, a);
+	__save(B, b);
+
 	while (N--)
-		dst[N] = a[N] & b[N];
+		dst[N] = A[N] & B[N];
 
 }
 
@@ -25,7 +30,7 @@ void	uint_and_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N) {
 
 	CHUNK_TYPE B[N];
 
-	memset(B, 0, CHUNK_BYTES);
+	__res(B);
 	B[0] = b;
 	uint_and(dst, a, B, N);
 

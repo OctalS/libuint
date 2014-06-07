@@ -15,9 +15,8 @@ void	uint_sub(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE *b, unsigned int N) {
 	c = 0;
 	x = 0;
 
-	/* save a and b */
-	memcpy(A, a, sizeof(A));
-	memcpy(B, b, sizeof(B));
+	__save(A, a);
+	__save(B, b);
 
 	for (chunk = 0; chunk < N; chunk++) {
 		dst[chunk] = x = A[chunk] - B[chunk] - c;
@@ -49,7 +48,7 @@ void	uint_sub_u(CHUNK_TYPE *dst, CHUNK_TYPE *a, CHUNK_TYPE b, unsigned int N) {
 
 	CHUNK_TYPE B[N];
 	
-	memset(B, 0, CHUNK_BYTES);
+	__res(B);
 	B[0] = b;
 	uint_sub(dst, a, B, N);
 }

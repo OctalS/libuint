@@ -19,10 +19,10 @@ void	uint_div(CHUNK_TYPE *q, CHUNK_TYPE *r, CHUNK_TYPE *a, CHUNK_TYPE *b, unsign
 		return;
 	}
 
-	memcpy(A, a, sizeof(A));
-	memcpy(B, b, sizeof(B));
-	memset(q, 0, CHUNK_BYTES);
-	memset(r, 0, CHUNK_BYTES);
+	__save(A, a);
+	__save(B, b);
+	__res(q);
+	__res(r);
 
 	for (i = TOTAL_BITS - 1; i >= 0; i--) {
 		uint_shl(r, 1, N);
@@ -47,7 +47,7 @@ void	uint_div_u(CHUNK_TYPE *q, CHUNK_TYPE *r, CHUNK_TYPE *a, CHUNK_TYPE b, unsig
 
 	CHUNK_TYPE B[N];
 
-	memset(B, 0, CHUNK_BYTES);
+	__res(B);
 	B[0] = b;
 	uint_div(q, r, a, B, N);
 
