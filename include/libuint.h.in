@@ -25,20 +25,27 @@
 #define LIBUINT_VERSION_STRING(a) LIBUINT_TO_STRING(a)
 
 
-
 //		CPU size check
 
 #undef SIZEOF_VOID_P
 
 #if SIZEOF_VOID_P == 4
+#  define LIBUINT_32
 #  define CHUNK_TYPE    uint32_t
 #  define HEX_FMT	"%x"
+
 #elif SIZEOF_VOID_P == 8
+
+#  define LIBUINT_64
 #  define CHUNK_TYPE    uint64_t
 #  define HEX_FMT	"%lx"
+
 #else
+
 #  error Invalid size!
-#endif
+
+#endif /* SIZEOF_VOID_P */
+
 
 //		Types and Sizes
 
@@ -59,14 +66,14 @@
 #define U2048		uint_val(2048)
 #define UMAX		U2048
 
+#ifdef LIBUINT_32
 uint_create(Uint64_t, U64);
+#endif
 uint_create(Uint128_t, U128);
 uint_create(Uint256_t, U256);
 uint_create(Uint512_t, U512);
 uint_create(Uint1024_t, U1024);
 uint_create(Uint2048_t, U2048);
-
-
 
 
 //		Limits
