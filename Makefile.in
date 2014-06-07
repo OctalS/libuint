@@ -7,6 +7,8 @@ FLAGS = $(CFLAGS) $(CPPFLAGS)
 OBJ_FLAGS = -O3 -Wall -fPIC -I. -I$(inc)
 
 prefix = @prefix@
+includedir = @includedir@
+libdir = @libdir@
 
 example = example
 out = libuint
@@ -39,14 +41,14 @@ debug:
 	make example CFLAGS+=-g
 
 install $(out).so $(out).a:
-	install -D $(out).so $(prefix)/lib/$(out).so
-	install -D $(out).a $(prefix)/lib/$(out).a
-	install -D $(inc)/$(out).h $(prefix)/include/$(out).h
+	install -D $(out).so $(libdir)/$(out).so
+	install -D $(out).a $(libdir)/$(out).a
+	install -m 644 -D $(inc)/$(out).h $(includedir)/$(out).h
 
 uninstall:
-	rm -f $(prefix)/lib/$(out).so
-	rm -f $(prefix)/lib/$(out).a
-	rm -f $(prefix)/include/$(out).h
+	rm -f $(libdir)/$(out).so
+	rm -f $(libdir)/$(out).a
+	rm -f $(includedir)/$(out).h
 
 clean:
 	rm -f $(example) $(out)* $(src)/*.o
